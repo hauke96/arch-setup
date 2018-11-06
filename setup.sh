@@ -236,6 +236,17 @@ function install_apps()
 	su hauke -c "yay -S --needed spotify"
 }
 
+function install_theme()
+{
+	assert_not_root
+
+	mkdir -p ~/.local/share/color-schemes/
+	mkdir -p ~/.local/share/plasma/desktoptheme/
+
+	cp kde-greeze-dark-green/BreezeDarkGreen.colors ~/.local/share/color-schemes/BreezeDarkGreen.colors
+	cp -r kde-greeze-dark-green/breeze-dark-green ~/.local/share/plasma/desktoptheme/
+}
+
 function usage()
 {
 	cat<<END
@@ -252,6 +263,7 @@ Options:
   -x    Installs X
   -k    Installs KDE
   -A    Installs the basic applications
+  -t    Configured the "Breeze Dark Green" theme
   -h    Shows this message
 
 All feedback to: 
@@ -268,11 +280,12 @@ then
 	install_xorg
 	install_kde
 	install_apps
+	su hauke -c "install_theme"
 
 	exit
 fi
 
-while getopts "upadxkAh" opt; do
+while getopts "upadxkAth" opt; do
 	case $opt in
 	u)
 		create_user
@@ -294,6 +307,9 @@ while getopts "upadxkAh" opt; do
 		;;
 	A)
 		install_apps
+		;;
+	t)
+		install_theme
 		;;
 	h)
 		usage
