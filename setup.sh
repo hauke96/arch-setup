@@ -273,9 +273,11 @@ END
 # getopts for bash cannot handle long arguments:
 if [ $1 == "--all" ]
 then
+	assert_root
+
 	create_user
 	setup_pacman
-	setup_aur
+	su hauke -c "setup_aur"
 	install_driver
 	install_xorg
 	install_kde
