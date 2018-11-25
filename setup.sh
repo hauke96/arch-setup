@@ -247,6 +247,12 @@ function install_theme()
 	cp -r kde-greeze-dark-green/breeze-dark-green ~/.local/share/plasma/desktoptheme/
 }
 
+function install_configs()
+{
+	mkdir -p ~/.gnupg
+	cp ./gpg-agent.conf ~/.gnupg/
+}
+
 function usage()
 {
 	cat<<END
@@ -264,6 +270,7 @@ Options:
   -k    Installs KDE
   -A    Installs the basic applications
   -t    Configured the "Breeze Dark Green" theme
+  -c    Installs all configs and dot-files
   -h    Shows this message
 
 All feedback to: 
@@ -283,6 +290,7 @@ then
 	install_kde
 	install_apps
 	install_theme
+	install_configs
 	su hauke -c "install_theme"
 
 	exit
@@ -313,6 +321,9 @@ while getopts "upadxkAth" opt; do
 		;;
 	t)
 		install_theme
+		;;
+	c)
+		install_configs
 		;;
 	h)
 		usage
