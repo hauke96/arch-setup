@@ -282,6 +282,7 @@ then
 	install_xorg
 	install_kde
 	install_apps
+	install_theme
 	su hauke -c "install_theme"
 
 	exit
