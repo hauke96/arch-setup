@@ -192,6 +192,7 @@ function install_apps()
 		texlive-latexextra \
 		texlive-science \
 		texstudio
+	yay -S --needed latex-pgfplots
 	su hauke -c "yay -S qemu-kvm"
 
 	# Internet
