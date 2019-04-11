@@ -119,6 +119,16 @@ function install_driver_printer()
 	$PRINT_MANAGER
 }
 
+function install_driver_misc()
+{
+	assert_root
+
+	pacman -S --needed \
+		xsetwacom \
+		input-wacom \
+		xf86-input-wacom
+}
+
 # Driver
 function install_driver()
 {
@@ -126,6 +136,7 @@ function install_driver()
 
 	install_driver_graphics
 	install_driver_printer	
+	install_driver_misc
 }
 
 # Xorg
@@ -185,7 +196,9 @@ function install_apps()
 		hunspell-de \
 		hunspell-en_US \
 		virt-manager \
-		qemu texlive-core \
+		qemu \
+		ovmf \
+		texlive-core \
 		texlive-bibtexextra \
 		texlive-fontsextra \
 		texlive-langextra \
@@ -233,7 +246,9 @@ function install_apps()
 		okular \
 		imagemagick \
 		ffmpeg \
-		pavucontrol
+		pavucontrol \
+		skanlite
+
 	su hauke -c "yay -S --needed spotify"
 }
 
